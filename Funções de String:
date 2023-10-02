@@ -1,0 +1,26 @@
+create database aula_20230817;
+use aula_20230817;
+                                                                        
+CREATE TABLE nomes (
+    nome VARCHAR(255)
+);
+
+INSERT INTO nomes (nome) VALUES
+    ('Roberta'),
+    ('Roberto'),
+    ('Maria Clara'),
+    ('João');
+
+SELECT UPPER(nome) AS nome_maiusculo
+FROM nomes;
+
+SELECT nome, LENGTH(nome) AS tamanho
+FROM nomes;
+
+SELECT
+    CASE
+        WHEN nome LIKE '%João%' OR nome LIKE '%Roberto%' THEN CONCAT('Sr. ', nome)
+        WHEN nome LIKE '%Maria%' THEN CONCAT('Sra. ', nome)
+        ELSE nome
+    END AS nome_com_prefixo
+FROM nomes;
