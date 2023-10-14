@@ -91,4 +91,47 @@ SELECT produto, MAX(preco) AS produto_mais_caro FROM produtos;
 SELECT produto, MIN(preco) AS produto_mais_barato FROM produtos;
 SELECT SUM(IF(quantidade > 0, preco, 0)) AS soma_total_em_estoque FROM produtos;
 
+DELIMITER //
+CREATE FUNCTION FATORIAL(numero INT)
+RETURNS INT
+BEGIN
+    DECLARE resultado INT;
+    SET resultado = 1;
+    WHILE numero > 0 DO
+        SET resultado = resultado * numero;
+        SET numero = numero - 1;
+    END WHILE;
+    RETURN resultado;
+END;
+//
+DELIMITER ;
 
+DELIMITER //
+CREATE FUNCTION f_exponencial(base DECIMAL(10, 2), expoente INT)
+RETURNS DECIMAL(10, 2)
+BEGIN
+    DECLARE resultado DECIMAL(10, 2);
+    SET resultado = 1;
+    WHILE expoente > 0 DO
+        SET resultado = resultado * base;
+        SET expoente = expoente - 1;
+    END WHILE;
+    RETURN resultado;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION is_palindromo(palavra VARCHAR(255))
+RETURNS INT
+BEGIN
+    DECLARE reverso VARCHAR(255);
+    SET reverso = REVERSE(palavra);
+    IF palavra = reverso THEN
+        RETURN 1; -- É um palíndromo
+    ELSE
+        RETURN 0; -- Não é um palíndromo
+    END IF;
+END;
+//
+DELIMITER ;
